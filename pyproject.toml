@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "excel2pyvis"
+version = "0.1.0"
+description = ""
+authors = ["DeAngelo Floyd <135054919+delonius22@users.noreply.github.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pyvis = "^0.3.2"
+pandas = "^2.2.2"
+networkx = "^3.3"
+openpyxl = "^3.1.5"
+holoviews = "^1.19.1"
+matplotlib = "^3.9.1"
+hvplot = "^0.10.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
