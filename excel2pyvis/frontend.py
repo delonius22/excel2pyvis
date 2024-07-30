@@ -7,16 +7,6 @@ import matplotlib.pyplot as plt
 
 
 
-def visualize_data(self):
-    source_column = self.source_multiselect.get()
-    target_column = self.target_multiselect.get()
-    if source_column and target_column:
-        graph = nx.from_pandas_edgelist(df, source=source_column, target=target_column)
-        plt.figure(figsize=(10, 6))
-        pos = nx.spring_layout(graph)
-        nx.draw_networkx(graph, pos, with_labels=True, node_color='lightblue', node_size=500, edge_color='gray')
-        plt.title("Network Visualization")
-        plt.show()
 
 class MyApp(tk.Tk):
     def __init__(self):
@@ -75,8 +65,19 @@ class MyApp(tk.Tk):
     def visualize_data(self):
         source_column = self.source_multiselect.get()
         target_column = self.target_multiselect.get()
+        if len(source_column) > 0:
+            source_df = self.df[source_column]
+        elif len(source_column) == 0:
+            exit()
+        if len(target_column) > 0:
+            target_df = self.df[target_column]
+        elif len(target_column) == 0:
+            target_df = self.df.drop(columns=source_column)
+        
+
         if source_column and target_column:
-            graph = nx.from_pandas_edgelist(self.df, source=source_column, target=target_column)
+            graph = nx.from_pandas_edgelist(source_df, target_df)
+            # graph = nx.from_pandas_edgelist(self.df, source=source_column, target=target_column)
             plt.figure(figsize=(10, 6))
             pos = nx.spring_layout(graph)
             nx.draw_networkx(graph, pos, with_labels=True, node_color='lightblue', node_size=500, edge_color='gray')
